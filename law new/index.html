@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive Navbar | CodingNepal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com/dist/email.min.js"></script>
+    <style>
+      /* CSS styles for the navbar */
+    </style>
+    <script>
+      // JavaScript code to close the navbar for small devices
+      function toggleNavbar() {
+        const nav = document.querySelector("ul");
+        const icon = document.querySelector(".checkbtn i");
+
+        if (nav.style.left === "-100%") {
+          nav.style.left = "0";
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          nav.style.left = "-100%";
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      }
+      window.addEventListener("DOMContentLoaded", (event) => {
+        // Get the current year
+        const currentYear = new Date().getFullYear();
+
+        // Update the HTML element with the current year
+        const yearElement = document.getElementById("currentYear");
+        yearElement.textContent = currentYear;
+      });
+    </script>
+  </head>
+  <body>
+    <nav>
+      <label for="check" class="checkbtn" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </label>
+      <label class="logo">Jamil Law Firm</label>
+      <ul>
+        <li><a onclick="toggleNavbar()" class="active" href="#">Home</a></li>
+        <li><a onclick="toggleNavbar()" href="#about">About</a></li>
+        <li><a onclick="toggleNavbar()" href="#service">Services</a></li>
+        <li>
+          <p>
+            <a onclick="toggleNavbar()" href="#formm" class="nohover"
+              ><button class="button__contact">Contact</button></a
+            >
+          </p>
+        </li>
+      </ul>
+    </nav>
+    <section>
+      <main class="main__sec">
+        <picture
+          ><img
+            src="/images/manStand.jpg"
+            height="500px"
+            width="500px"
+            alt="law"
+            class="image__first__stand"
+          />
+        </picture>
+        <aside id="about" class="first__aside__contact">
+          <h2>Expert Legal Services for Your Business and Personal Needs</h2>
+          <h1 class="name">
+            <span>Advocate Jamil Ahmad</span>
+          </h1>
+          <p class="address">
+            Address :
+            <span> Civil Court Bar Association</span>
+          </p>
+
+          <p class="address">
+            Areas served:
+            <span>Bokaro, Jamshedpur, Ranchi and nearby areas</span>
+          </p>
+          <p class="phone">Phone Number : <span> 0000 000 000</span></p>
+          <p class="phone">Email Address : <span> jamil@gmail.com</span></p>
+
+          <p class="thank__consider">
+            Thank you for considering us for your legal needs.
+          </p>
+        </aside>
+      </main>
+    </section>
+
+    <article id="formm" class="form__sec">
+      <div>
+        <h1 class="form-heading">Plese fill the Form</h1>
+
+        <aside class="form__style">
+          <label class="form-label" for="name">Name:</label>
+          <!-- <input
+            class="form-input"
+            type="text"
+            id="name"
+            name="name"
+            required
+          /> -->
+          <input class="form-input" type="text" id="sendername" />
+          <label class="form-label" for="phone">Phone:</label>
+          <!-- <input
+            class="form-input"
+            type="text"
+            id="phone"
+            name="phone"
+            required
+          /> -->
+          <input class="form-input" type="text" id="phone" />
+          <label class="form-label" for="email">Email:</label>
+          <input class="form-input" type="email" id="emailIs" />
+
+          <label class="form-label" for="narration">Narration:</label>
+          <!-- <textarea
+            class="form-input"
+            id="narration"
+            name="narration"
+            rows="4"
+            required
+          ></textarea> -->
+          <textarea
+            class="form-input"
+            id="message"
+            cols="40"
+            rows="8"
+          ></textarea>
+
+          <input
+            class="form-submit"
+            onclick="sendMail();"
+            type="submit"
+            value="Submit"
+          />
+        </aside>
+      </div>
+      <div class="defoult__none">
+        main (Email)
+        <input type="text" id="to" value="amanakhtar991@gmail.com" /> <br />
+        ccc (Email)
+        <input type="text" id="ccc" value="amanakhtar881@gmail.com" /> <br />
+        Subject
+        <input type="text" id="subject" value="default query regarding case" />
+      </div>
+      <script>
+        function sendMail() {
+          (function () {
+            emailjs.init("V4ff4_ZX6I5o9dLIC"); // Replace with your User ID
+          })();
+
+          var params = {
+            sendername: document.querySelector("#sendername").value,
+            to: document.querySelector("#to").value,
+            subject: document.querySelector("#subject").value,
+            phone: document.querySelector("#phone").value,
+            message: document.querySelector("#message").value,
+            emailIs: document.querySelector("#emailIs").value,
+            ccc: document.querySelector("#ccc").value,
+          };
+
+          var serviceID = "service_ahkiimx"; // Replace with your Email Service ID
+          var templateID = "template_meiegsj"; // Replace with your Email Template ID
+
+          emailjs
+            .send(serviceID, templateID, params)
+            .then((res) => {
+              alert("Email sent successfully!!");
+            })
+            .catch((error) => {
+              alert("Failed to send email. Please try again later.");
+            });
+        }
+      </script>
+      <img
+        src="/images/form.jpg"
+        alt="law"
+        height="500px"
+        width="500px"
+        alt=""
+        class="image__second"
+      />
+    </article>
+    <section id="services" class="">
+      <div id="service" class="our__services">
+        <aside>
+          <h2 class="head__our__service">Our <span>services</span></h2>
+          <p class="p__service">
+            We offer a wide range of legal services to individuals and
+            businesses. Our experienced attorneys have a deep understanding of
+            the law and the legal system, and we have a proven track record of
+            success in a variety of practice areas.
+          </p>
+        </aside>
+        <img
+          src="/images/talk.jpg"
+          alt="law"
+          height="500px"
+          width="600px"
+          alt=""
+          class="image__second"
+        />
+      </div>
+
+      <div class="section__service">
+        <aside class="aside__for__services__offered">
+          Personal Injury: If you've been injured in an accident, our personal
+          injury attorneys can help you recover the compensation you deserve. We
+          handle cases involving car accidents, slip and fall accidents, product
+          liability, and more.
+        </aside>
+        <aside class="aside__for__services__offered">
+          Family Law: Our family law attorneys provide compassionate, effective
+          representation in a range of family law matters, including divorce,
+          child custody, and child support.
+        </aside>
+        <aside class="aside__for__services__offered">
+          Business Law: From entity formation to contract negotiations, our
+          business law attorneys have the knowledge and experience to help
+          businesses of all sizes navigate the complex legal landscape.
+        </aside>
+        <aside class="aside__for__services__offered">
+          Real Estate: Our real estate attorneys handle a range of real estate
+          matters, including residential and commercial transactions, leasing,
+          and land use and zoning.
+        </aside>
+        <aside class="aside__for__services__offered">
+          Estate Planning: We help clients protect their assets and plan for the
+          future with comprehensive estate planning services, including wills,
+          trusts, and powers of attorney.
+        </aside>
+        <aside class="aside__for__services__offered">
+          Criminal Defense: Our criminal defense attorneys provide aggressive
+          representation to clients facing a range of criminal charges, from DUI
+          to drug offenses and more.
+        </aside>
+      </div>
+    </section>
+    <section class="no__matter">
+      <div class="width__nomat">
+        <h1 class="heading__exp">Experienced Attorneys for Your Legal Needs</h1>
+        <p>
+          No matter what legal issue you're facing, our attorneys have the
+          knowledge, experience, and dedication to help you achieve the best
+          possible outcome. Contact us today to learn more about how we can help
+          with your legal needs.
+        </p>
+      </div>
+      <picture>
+        <img
+          src="/images/ok.jpg"
+          alt="law"
+          height="300px"
+          width="300px"
+          alt=""
+          class="image__second"
+        />
+      </picture>
+    </section>
+    <!-- footer -->
+    <footer class="section">
+      <h4>
+        Copyright &copy; [<span id="currentYear"></span> ]<span
+          id="date"
+        ></span>
+        [Jamil Law Firm]. All rights reserved.
+        <span id="date"></span>
+      </h4>
+      <p>
+        The content on this website is protected by copyright law and may not be
+        reproduced or used in any manner without the express written permission.
+        This includes all text, images, graphics, logos, and other materials
+        contained on the site. Some of the images and other materials on this
+        site may be subject to copyright owned by third parties. If you believe
+        that any content on this website infringes on your copyright or other
+        intellectual property rights, please contact us immediately so that we
+        can investigate and take appropriate action. Thank you for respecting
+        our intellectual property rights.
+      </p>
+    </footer>
+  </body>
+</html>
