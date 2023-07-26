@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Responsive Navbar | CodingNepal</title>
+    <title>Jamil Law Firm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <link
@@ -11,6 +11,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com/dist/email.min.js"></script>
+    <!-- Add this in the <head> section of your HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-i6Wep3N98pWZ5hETGQI7h1NbxTsqYBWTyX2IYIMmrbs1mC4AftooCxFWYNlaJ9Aa2n9ozEhwedBGltlJuYRXw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       /* CSS styles for the navbar */
     </style>
@@ -64,7 +73,7 @@
       <main class="main__sec">
         <picture
           ><img
-            src="/images/manStand.jpg"
+            src="/law new/images/manStand.jpg"
             height="500px"
             width="500px"
             alt="law"
@@ -85,8 +94,34 @@
             Areas served:
             <span>Bokaro, Jamshedpur, Ranchi and nearby areas</span>
           </p>
-          <p class="phone">Phone Number : <span> 0000 000 000</span></p>
-          <p class="phone">Email Address : <span> jamil@gmail.com</span></p>
+          <p class="phone">
+            Phone Number: <span id="phoneNumber">7004-367-563</span>
+          </p>
+          <p class="phone">
+            Email Address: <span id="emailAddress">jamil@gmail.com</span>
+          </p>
+          <div class="call__mail">
+            <button onclick="callNumber()">
+              <i class="fas fa-phone-alt"></i> &nbsp; Call
+            </button>
+            <button onclick="sendEmail()">
+              <i class="far fa-envelope"></i> &nbsp; Email
+            </button>
+          </div>
+
+          <script>
+            function callNumber() {
+              var phoneNumber =
+                document.getElementById("phoneNumber").innerText;
+              window.location.href = "tel:" + phoneNumber;
+            }
+
+            function sendEmail() {
+              var emailAddress =
+                document.getElementById("emailAddress").innerText;
+              window.location.href = "mailto:" + emailAddress;
+            }
+          </script>
 
           <p class="thank__consider">
             Thank you for considering us for your legal needs.
@@ -100,35 +135,17 @@
         <h1 class="form-heading">Plese fill the Form</h1>
 
         <aside class="form__style">
-          <label class="form-label" for="name">Name:</label>
-          <!-- <input
-            class="form-input"
-            type="text"
-            id="name"
-            name="name"
-            required
-          /> -->
+          <label class="form-label" for="name" required>Name:</label>
+
           <input class="form-input" type="text" id="sendername" />
-          <label class="form-label" for="phone">Phone:</label>
-          <!-- <input
-            class="form-input"
-            type="text"
-            id="phone"
-            name="phone"
-            required
-          /> -->
-          <input class="form-input" type="text" id="phone" />
+          <label class="form-label" for="phone" required>Phone:</label>
+
+          <input class="form-input" type="number" id="phone" />
           <label class="form-label" for="email">Email:</label>
           <input class="form-input" type="email" id="emailIs" />
 
           <label class="form-label" for="narration">Narration:</label>
-          <!-- <textarea
-            class="form-input"
-            id="narration"
-            name="narration"
-            rows="4"
-            required
-          ></textarea> -->
+
           <textarea
             class="form-input"
             id="message"
@@ -158,13 +175,30 @@
             emailjs.init("V4ff4_ZX6I5o9dLIC"); // Replace with your User ID
           })();
 
+          var sendername = document.querySelector("#sendername").value;
+          var phone = document.querySelector("#phone").value;
+          var emailIs = document.querySelector("#emailIs").value;
+          var message = document.querySelector("#message").value;
+
+          // Custom validation for name (required)
+          if (sendername.trim() === "") {
+            alert("Please enter your name.");
+            return; // Prevent form submission if name is not filled
+          }
+
+          // Custom validation for phone number (at least 10 digits)
+          if (phone.length < 10) {
+            alert("Phone number must be at least 10 digits long.");
+            return; // Prevent form submission if phone number is less than 10 digits
+          }
+
           var params = {
-            sendername: document.querySelector("#sendername").value,
+            sendername: sendername,
             to: document.querySelector("#to").value,
             subject: document.querySelector("#subject").value,
-            phone: document.querySelector("#phone").value,
-            message: document.querySelector("#message").value,
-            emailIs: document.querySelector("#emailIs").value,
+            phone: phone,
+            message: message,
+            emailIs: emailIs,
             ccc: document.querySelector("#ccc").value,
           };
 
@@ -174,13 +208,24 @@
           emailjs
             .send(serviceID, templateID, params)
             .then((res) => {
-              alert("Email sent successfully!!");
+              // Show SweetAlert message on success
+              Swal.fire({
+                icon: "success",
+                title: "Thank you!",
+                text: "We will contact you soon.",
+              });
             })
             .catch((error) => {
-              alert("Failed to send email. Please try again later.");
+              // Show SweetAlert message on error
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Failed to send email. Please try again later.",
+              });
             });
         }
       </script>
+
       <img
         src="/images/form.jpg"
         alt="law"
