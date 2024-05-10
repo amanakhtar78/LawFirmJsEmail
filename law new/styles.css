@@ -451,3 +451,7 @@ footer p {
 .main__sec {
   min-height: 80vh;
 }
+.icon__whats__app img {
+  width: 40px;
+  height: auto;
+}
